@@ -1,37 +1,98 @@
 package com.ashish.linkedList.problems;
 
 public class LinkedList {
-	Node head;
+	static Node head;
 	Node trail;
 	public static void main(String[] args) {
 
 		LinkedList linkedList = new LinkedList();
 
-		linkedList.add2FirstToCircular(10);
+		/*linkedList.add2FirstToCircular(10);
 		linkedList.add2FirstToCircular(20);
 		linkedList.add2FirstToCircular(30);
 		linkedList.add2FirstToCircular(40);
 		linkedList.add2FirstToCircular(50);
-		//linkedList.add2FirstToCircular(60);
-		//linkedList.add2FirstToCircular(70);
+		linkedList.add2FirstToCircular(60);
+		linkedList.add2FirstToCircular(70);
 		linkedList.displayCircularList();
 		linkedList.getLoopFirstNode();
-		linkedList.getLengthOfLoop();
+		linkedList.getLengthOfLoop();*/
 
 
 
 
 
 
-		/*linkedList.addToFirst(1);
-		linkedList.addToFirst(2);
-		linkedList.addToFirst(3);
-		linkedList.addToFirst(4);
-		linkedList.addToFirst(5);
-		linkedList.addToFirst(6);
+		linkedList.addToFirst(61);
+		linkedList.addToFirst(51);
+		linkedList.addToFirst(41);
+		linkedList.addToFirst(31);
+		linkedList.addToFirst(21);
+		linkedList.addToFirst(11);
+		//linkedList.insertInShortedLinkedList(77);
 		linkedList.display();
-		System.out.println("Result : "+linkedList.listIsCircular());
-		linkedList.nthNodeFormEnd(3); */  
+		linkedList.reverseRecursion(head);
+			
+		linkedList.display();
+		
+		
+		//System.out.println("List is circular : "+linkedList.listIsCircular());
+		//linkedList.nthNodeFormEnd(3);   
+	}
+	
+	private void reverseRecursion(Node current){
+		
+		
+		if(current.getNext() == null){
+			head = current;
+			return;
+		}
+		reverseRecursion(current.getNext());
+		Node next = current.getNext();
+		next.setNext(current);
+		current.setNext(null);
+		
+	}
+	
+	private void reverseLinkedList(){
+		Node prev = null, next = null;
+		Node current = head;
+		
+		while(current != null) {
+			next = current.getNext();
+			current.setNext(prev);
+			prev = current;
+			current = next;		
+		}
+		
+		head = prev;
+		
+		display();
+	}
+	
+	
+	
+	
+	
+	private void insertInShortedLinkedList(int data){
+		Node node = new Node(data);
+			Node temp = null;
+			Node current = head;
+		if(head != null){
+			
+			while(current != null && data > current.getData()){
+				temp = current;
+				current = current.getNext();
+				//System.out.println("Datta : "+current.getData());
+			}
+			
+			node.setNext(current);
+			temp.setNext(node);
+			
+			
+		}else{
+			System.out.println("List is empty");
+		}
 	}
 
 	private boolean listIsCircular(){
@@ -141,8 +202,8 @@ public class LinkedList {
 		Node current = head;
 		Node forward = head;
 
-		int temp = 1;
-		while(temp++ <= n){
+		int temp = 0;
+		while(temp++ < n){
 			forward = forward.getNext();
 		}	
 		while(forward != null){
